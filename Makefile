@@ -18,7 +18,7 @@ LIBFT_A 	= $(LIBFT_PATH)/libft.a
 
 INCLUDE		= -I inc -I $(LIBFT_PATH)
 
-SRC = src/main.c src/errors.c src/pipex.c
+SRC = src/main.c src/errors.c src/pipex.c src/path.c src/utils.c
 			  
 OBJ	= $(SRC:.c=.o)
 

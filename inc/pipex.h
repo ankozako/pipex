@@ -28,13 +28,8 @@ typedef struct s_pipex
 	char		**envp;
 }	t_pipex;
 
-int		main(int ac, char **av, char **envp);
+void	exit_error(void);
+void	put_error(const char *prefix, const char *message);
 
-void	ft_puterr(const char *a, const char *b);
-void	ft_error(const char *what);
-void	ft_free_arr(char **arr);
-void	ft_exit_error(const char *path);
-
-int		run_pipex(t_pipex *pipex);
 
 #endif

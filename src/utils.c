@@ -1,43 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ankozako <ankozako@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/22 13:03:40 by ankozako          #+#    #+#             */
-/*   Updated: 2025/09/22 13:03:41 by ankozako         ###   ########.fr       */
+/*   Created: 2025/09/27 12:08:32 by ankozako          #+#    #+#             */
+/*   Updated: 2025/09/27 12:08:37 by ankozako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
 
-void	exit_error(void)
+void	dup2(int ftom, int to)
 {
-	perror("pipex");
-	exit(1);
+	if (dup2(from, to) < 0)
+		exit_error();
 }
 
-void	put_error(const char *prefix, const char *message)
+int	open_in(char *infile)
 {
-	if (prefix)
-		ft_putstr_fd((char *)prefix, 2);
-	ft_putstr_fd(": ", 2);
-	if (message)
-		ft_putstr_fd((char *)message, 2);
-	ft_putstr_fd("\n", 2);
-}
+	int	fd;
 
-void	free_split(char **array)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
+	fd = open(infile, O_RDONLY);
+	if (fd < 0)
 	{
-		free(array[i]);
-		i++;
+		put_error("pipex", infile);
+		fd = open("/dev/null", O_RDONLY);
+		if (fd < 0)
+			exit_error();
 	}
-	free(array);
+	return (fd);
+}
+
+int	open_out(char *outfile)
+{
+	int	fd;
+
+	fd = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		put_error("pipex", outfile);
+		exit_error();
+	}
+	return (fd);
 }

@@ -35,10 +35,10 @@ static char	*path_join(const char *dir, const char *cmd)
 		return (NULL);
 	full = ft_strjoin(temp, (char *)cmd);
 	free(temp);
-	return (full); 
+	return (full);
 }
 
-static char	*find_in_dirs(char **dirs ,const char *cmd)
+static char	*find_in_dirs(char **dirs, const char *cmd)
 {
 	int		i;
 	char	*full;
@@ -54,7 +54,7 @@ static char	*find_in_dirs(char **dirs ,const char *cmd)
 		free(full);
 		i++;
 	}
-	return (NULL);	
+	return (NULL);
 }
 
 char	*get_cmd_path(char *cmd, char **envp)
@@ -70,7 +70,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 	pathline = get_pathline(envp);
 	if (!pathline)
 		return (NULL);
-	dirs = ft_split(pl, ":");
+	dirs = ft_split(pathline, ':');
 	if (!dirs)
 		return (NULL);
 	full = find_in_dirs(dirs, cmd);

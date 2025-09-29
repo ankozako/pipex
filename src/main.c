@@ -13,7 +13,7 @@
 
 static int	usage(void)
 {
-	ft_puterr("Usage", "./pipex file1 cmd1 cmd2 file2");
+	put_error("Usage", "./pipex file1 cmd1 cmd2 file2");
 	return (1);
 }
 

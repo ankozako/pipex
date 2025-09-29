@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <stdio.h>
 # include "../lib/libft/libft.h"
 
 typedef struct s_pipex
@@ -30,6 +31,12 @@ typedef struct s_pipex
 
 void	exit_error(void);
 void	put_error(const char *prefix, const char *message);
+void	free_split(char **array);
 
+int		open_in(const char *infile);
+int		open_out(const char *outfile);
+
+char	*get_cmd_path(char *cmd, char **envp);
+int		run_pipex(t_pipex *px);
 
 #endif

@@ -11,20 +11,14 @@
 /* ************************************************************************** */
 #include "pipex.h"
 
-void	dup2(int ftom, int to)
-{
-	if (dup2(from, to) < 0)
-		exit_error();
-}
-
-int	open_in(char *infile)
+int	open_in(const char *infile)
 {
 	int	fd;
 
 	fd = open(infile, O_RDONLY);
 	if (fd < 0)
 	{
-		put_error("pipex", infile);
+		put_error("pipex", (const char *)infile);
 		fd = open("/dev/null", O_RDONLY);
 		if (fd < 0)
 			exit_error();
@@ -32,14 +26,14 @@ int	open_in(char *infile)
 	return (fd);
 }
 
-int	open_out(char *outfile)
+int	open_out(const char *outfile)
 {
 	int	fd;
 
 	fd = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		put_error("pipex", outfile);
+		put_error("pipex", (const char *)outfile);
 		exit_error();
 	}
 	return (fd);
